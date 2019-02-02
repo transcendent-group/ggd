@@ -3,27 +3,27 @@ package main
 import (
     "time"
 
-    "gobot.io/x/gobot"
     "gobot.io/x/gobot/platforms/dji/tello"
 )
 
 func main() {
+    drone := tello.NewDriver("8888")
 
-    time.Sleep(10*time.Second)
+    drone.Start()
 
-    player2 := tello.NewDriver("8888")
+    time.Sleep(2*time.Second)
 
-    work := func() {
-        gobot.After(5*time.Second, func() {
-            player2.TakeOff()
-        })
-    }
+    drone.TakeOff()
 
-    robot := gobot.NewRobot("tello",
-        []gobot.Connection{},
-        []gobot.Device{player2},
-        work,
-    )
+    time.Sleep(5*time.Second)
+    
+    drone.LeftFlip()
 
-    robot.Start()
+    time.Sleep(5*time.Second)
+    
+    drone.RightFlip()
+
+    time.Sleep(5*time.Second)
+    
+    drone.Land()
 }
