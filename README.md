@@ -72,7 +72,7 @@ This may create a new interface that is named something else, so be sure to chec
 
 Then scan the networks:
 
-airodump-ng wlan0
+`airodump-ng wlan0`
 
 Look for the network called `TELLO-D42128`, and make note of the `BSSID` (the Tello drone wifi access point MAC address), channel number and `STATION` (the controller's MAC address):
 
@@ -91,14 +91,14 @@ Look for the network called `TELLO-D42128`, and make note of the `BSSID` (the Te
                                                                                                                                                               
  BSSID              STATION            PWR   Rate    Lost    Frames  Probe                                                                                    
                                                                                                                                                                                                                                          
- (not associated)   3E:B8:06:F8:CB:67  -24    0 - 1      0        2                                                                                            60:60:1F:D4:21:28  D4:61:9D:EE:49:2F  -32   54e-54e  5993    30022  TELLO-D42128                                                                                              
+60:60:1F:D4:21:28  D4:61:9D:EE:49:2F  -32   54e-54e  5993    30022  TELLO-D42128                                                                                              
 ```
 
 In the above, these are:
 
-WiFi channel: `3`
-Tello drone MAC address: `60:60:1F:D4:21:28`
-Controller (iPhone) MAC address: `D4:61:9D:EE:49:2F`
+* WiFi channel: `3`
+* Tello drone MAC address: `60:60:1F:D4:21:28`
+* Controller (iPhone) MAC address: `D4:61:9D:EE:49:2F`
 
 ### Step 2: Capture a handshake
 
