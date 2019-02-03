@@ -32,11 +32,7 @@ airmon-ng
 
 If you do not see an interface listed then your wireless card does not support monitor mode.
 
-If it does, make sure that other interfering processes are killed:
-
-`airmon-ng check kill`
-
-You should see output similar to this:
+If it does, make sure that other interfering processes are killed, you should see output similar to this:
 
 ```
 root@kali:~/ggd# airmon-ng check kill
