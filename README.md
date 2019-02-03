@@ -11,7 +11,7 @@ You need:
 
 This github repo contains some files that will help you in the demo, but it is not a prerequisite to download it.
 
-In order to program the drone (if you want that, this is optional) you'll need the Go programming language and the Gobot framework (https://gobot.io):
+In order to program the drone (if you want that, this is optional, see step 6 below) you'll need the Go programming language and the Gobot framework (https://gobot.io):
 
 ```
 git clone https://github.com/transcendent-group/ggd.git
@@ -133,7 +133,7 @@ aireplay-ng --deauth 0 -a 60:60:1F:D4:21:28 -c D4:61:9D:EE:49:2F wlan0
 
 Keep the above command running, and connect to the `TELLO-D42128` network with the password from step 3. Start the Tello app on your phone, and takeoff!
 
-### Step 6 (optional): Connect to the drone from you laptop and do some sweet flips
+### Step 6 (optional): Connect to the drone from you laptop and program it to do some sweet flips
 
 Open a text editor and insert the correct password in the `wpa_supplicant.conf` file.
 
