@@ -22,7 +22,7 @@ go get -d -u gobot.io/x/gobot/...
 
 ## Demo walkthrough
 
-### Step 1: Sniff and find the drone’s WiFi netwo
+### Step 1: Sniff and find the drone’s WiFi network
 
 Begin by listing wireless interfaces that support monitor mode with:
 
