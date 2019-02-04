@@ -1,5 +1,3 @@
-// Hijacks a drone mid-air, performs some acrobatics, and lands
-
 package main
 
 import (
@@ -14,6 +12,10 @@ func main() {
     drone.Start()
 
     time.Sleep(2*time.Second)
+
+    drone.TakeOff()
+
+    time.Sleep(5*time.Second)
     
     drone.LeftFlip()
 
