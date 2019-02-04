@@ -154,8 +154,8 @@ dhclient wlan0
 Then compile and run:
 
 ```
-go build hijack.go
-./hijack
+go build flip.go
+./flip
 ```
 
 
